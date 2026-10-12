@@ -1,0 +1,3 @@
+#!/bin/sh
+# Docker comes from the community repository; setup-alpine leaves it commented out.
+sed -i -E 's|^#(https?://[^ ]*/v[0-9.]+/community)$|\1|' /etc/apk/repositories
