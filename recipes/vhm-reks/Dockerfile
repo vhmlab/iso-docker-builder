@@ -22,6 +22,7 @@ RUN apk add --no-cache docker docker-openrc docker-cli-compose docker-cli-buildx
 
 # Customizations: power button / lid, GRUB, mkinitfs, keymap, ttyS0, timezone,
 # setup-alpine answer file + auto-start on the live console (etc/vhm, etc/profile.d),
+# Docker log rotation (etc/docker/daemon.json: 10 MB x 3 per container),
 # community repo (Docker lives there; setup-alpine leaves it commented out)
 COPY recipes/vhm-reks/overlay/ /
 
