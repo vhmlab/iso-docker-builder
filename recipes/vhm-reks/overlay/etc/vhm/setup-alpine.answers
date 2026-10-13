@@ -1,0 +1,33 @@
+# setup-alpine answer file for the vhm-reks image (sourced as shell by setup-alpine).
+# Run: setup-alpine -f /etc/vhm/setup-alpine.answers  (offered automatically on root login, see
+# /etc/profile.d/vhm-autoinstall.sh). Values left unset are still asked interactively:
+# hostname, root password, user omar's password and SSH key, and the target disk (eMMC
+# numbering differs between machines: mmcblk0 on vhm31, mmcblk1 on vhm22, so it is never
+# hardcoded).
+KEYMAPOPTS="us us"
+DEVDOPTS=mdev
+
+# Wired USB ethernet (eth0) with DHCP; if eth0 is missing, setup-interfaces asks instead.
+if [ -e /sys/class/net/eth0 ]; then
+INTERFACESOPTS="auto lo
+iface lo inet loopback
+
+auto eth0
+iface eth0 inet dhcp
+"
+fi
+
+TIMEZONEOPTS="America/Los_Angeles"
+PROXYOPTS=none
+NTPOPTS=chrony
+# First mirror (CDN), community repo enabled (Docker lives there)
+APKREPOSOPTS="-1 -c"
+
+# Admin user omar (wheel + doas). Only the full name is preset so setup-user suggests
+# "omar" as login and asks for its password; giving the login name here would skip the
+# password prompt.
+USEROPTS="-a -f omar -g audio,input,video,netdev,docker"
+SSHDOPTS=openssh
+
+# Install mode sys; the disk is asked, and setup-disk confirms before erasing it.
+DISKOPTS="-m sys"

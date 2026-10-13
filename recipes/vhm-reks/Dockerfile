@@ -20,7 +20,8 @@ RUN apk add --no-cache iw wpa_supplicant
 RUN apk add --no-cache docker docker-openrc docker-cli-compose docker-cli-buildx \
       bash curl git tmux
 
-# Customizations: power button / lid, GRUB, mkinitfs, keymap, doas, ttyS0, timezone,
+# Customizations: power button / lid, GRUB, mkinitfs, keymap, ttyS0, timezone,
+# setup-alpine answer file + auto-start on the live console (etc/vhm, etc/profile.d),
 # community repo (Docker lives there; setup-alpine leaves it commented out)
 COPY recipes/vhm-reks/overlay/ /
 
