@@ -35,7 +35,7 @@ tag="alpine-image-builder/$recipe:$version"
 mkdir -p out; stamp="$(date +%Y%m%d-%H%M%S)"
 
 # The image is always built first (the ISO stage reuses its layers).
-docker build $cache $args -f "$work/Dockerfile" --target rootfs -t "$tag" -t "alpine-image-builder/$recipe:latest" .
+docker build $cache $args --load -f "$work/Dockerfile" --target rootfs -t "$tag" -t "alpine-image-builder/$recipe:latest" .
 manifest="out/$recipe-$stamp.manifest"
 { echo "recipe: $recipe"; echo "alpine: $version"; echo "built: $stamp"
   echo "kernel: $(docker run --rm "$tag" apk list -I linux-lts | cut -d" " -f1)"
