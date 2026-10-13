@@ -37,7 +37,7 @@ See `recipes/README.md` to write a recipe.
 Boot the ISO and log in as `root` (no password on the live system). The install starts
 automatically (`/etc/profile.d/vhm-autoinstall.sh` runs `setup-alpine -f /etc/vhm/setup-alpine.answers`).
 Preset: US keymap, wired eth0 DHCP, America/Los_Angeles, chrony, CDN mirror with community,
-openssh, admin user omar, sys install. Still asked per machine: hostname, root password,
-omar's password and SSH key (`none` to skip), and the target disk (check it is the eMMC, not
+openssh, admin user omar (vhmproxy's key authorized), sys install. Still asked per machine: hostname, root password,
+omar's password, and the target disk (check it is the eMMC, not
 an SD card; the device number differs between machines). Docker is enabled on the first boot
 of the installed system.
