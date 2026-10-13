@@ -1,0 +1,9 @@
+#!/bin/sh
+# Enable Docker on the installed system only. On the live ISO the root
+# filesystem is tmpfs, so nothing happens there (docker would pull in
+# networking before setup-alpine has written /etc/network/interfaces).
+[ "$(awk '$2 == "/" {print $3}' /proc/mounts | tail -1)" = tmpfs ] && exit 0
+rc-update show default | grep -qw docker && exit 0
+rc-update add cgroups default
+rc-update add docker default
+rc-service docker start

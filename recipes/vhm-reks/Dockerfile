@@ -25,6 +25,8 @@ RUN apk add --no-cache docker docker-openrc docker-cli-compose docker-cli-buildx
 COPY recipes/vhm-reks/overlay/ /
 
 # Services beyond the stock ones. acpid is stock too, but the power/lid handlers depend on it.
-RUN for s in acpid cgroups docker local; do rc-update add $s default; done
+# docker/cgroups are enabled on first boot of the installed system by
+# /etc/local.d/enable-docker.start, so they do not run on the live ISO.
+RUN for s in acpid local; do rc-update add $s default; done
 
 LABEL org.opencontainers.image.title="vhm-reks"
